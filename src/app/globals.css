@@ -59,8 +59,21 @@ body {
   color: var(--muted);
   display: inline-flex;
   font-size: 13px;
-  gap: 7px;
+  gap: 6px;
   white-space: nowrap;
+}
+
+.time-zone {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.time-divider {
+  color: var(--sand-deep);
+  font-size: 16px;
+  line-height: 1;
+  margin: 0 2px;
 }
 
 .site-nav {

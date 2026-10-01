@@ -13,29 +13,73 @@ const navLinks = [
   { href: "/CV", label: "CV", key: "cv" },
 ];
 
+const zurichTimeFormatter = new Intl.DateTimeFormat("en-GB", {
+  timeZone: "Europe/Zurich",
+  weekday: "short",
+  hour: "2-digit",
+  minute: "2-digit",
+  hourCycle: "h23",
+});
+
+function getZurichStatus(date) {
+  const parts = Object.fromEntries(
+    zurichTimeFormatter
+      .formatToParts(date)
+      .filter(({ type }) => type !== "literal")
+      .map(({ type, value }) => [type, value]),
+  );
+  const hour = Number(parts.hour);
+  const isBollicinaEvening =
+    (hour >= 20 && ["Fri", "Sat"].includes(parts.weekday)) ||
+    (hour < 1 && ["Sat", "Sun"].includes(parts.weekday));
+
+  let moment;
+
+  if (hour >= 1 && hour < 8) {
+    moment = { icon: "😴", label: "zzz..." };
+  } else if (hour >= 8 && hour < 12) {
+    moment = { icon: "☕", label: "Cappuccino time" };
+  } else if (hour >= 12 && hour < 18) {
+    moment = { icon: "☕", label: "Espresso time" };
+  } else if (hour >= 18 && hour < 20) {
+    moment = { icon: "🍹", label: "Spritz time" };
+  } else if (isBollicinaEvening) {
+    moment = { icon: "🥂", label: "Bollicina time" };
+  } else {
+    moment = { icon: "🍵", label: "Fruit tea time" };
+  }
+
+  return {
+    ...moment,
+    time: `${parts.hour}:${parts.minute}`,
+  };
+}
+
 export function SiteHeader({ active }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [drink, setDrink] = useState(null);
+  const [timeStatus, setTimeStatus] = useState(null);
 
   useEffect(() => {
-    const hour = new Date().getHours();
+    const updateTimeStatus = () => setTimeStatus(getZurichStatus(new Date()));
+    updateTimeStatus();
 
-    if (hour >= 5 && hour < 12) {
-      setDrink({ icon: "☕", label: "Cappuccino time" });
-    } else if (hour >= 12 && hour < 18) {
-      setDrink({ icon: "☕", label: "Espresso time" });
-    } else {
-      setDrink({ icon: "🍵", label: "Fruit tea time" });
-    }
+    const timer = window.setInterval(updateTimeStatus, 30_000);
+    return () => window.clearInterval(timer);
   }, []);
 
   return (
     <header className="site-header">
       <div className="site-nav-wrap">
-        {drink && (
-          <div className="time-drink" title={drink.label} aria-label={drink.label}>
-            <span aria-hidden="true">{drink.icon}</span>
-            <span>{drink.label}</span>
+        {timeStatus && (
+          <div
+            className="time-drink"
+            title={`${timeStatus.time} in Zurich · ${timeStatus.label}`}
+            aria-label={`CET time ${timeStatus.time}. ${timeStatus.label}`}
+          >
+            <span className="time-zone">CET time {timeStatus.time}</span>
+            <span className="time-divider" aria-hidden="true">·</span>
+            <span aria-hidden="true">{timeStatus.icon}</span>
+            <span>{timeStatus.label}</span>
           </div>
         )}
         <nav
