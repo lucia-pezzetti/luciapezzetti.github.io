@@ -305,7 +305,7 @@ export const projects = [
         ],
       },
       theorem: {
-        formula: String.raw`J_t(\mu_t,\nu) \leq \mathcal{K}_{j_t}(\mu_t,\nu)`,
+        formula: String.raw`J_t(\mu_t,\nu) \leq \mathcal{K}[j_t](\mu_t,\nu)`,
         formulaAlt:
           "The population cost-to-go is upper bounded by optimal transport with the single-agent cost-to-go as transport cost.",
         explanation: [
