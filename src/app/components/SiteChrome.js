@@ -16,7 +16,6 @@ const navLinks = [
 export function SiteHeader({ active }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [drink, setDrink] = useState(null);
-  const [theme, setTheme] = useState(null);
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -29,18 +28,6 @@ export function SiteHeader({ active }) {
       setDrink({ icon: "🍵", label: "Fruit tea time" });
     }
   }, []);
-
-  useEffect(() => {
-    setTheme(document.documentElement.dataset.theme || "light");
-  }, []);
-
-  const toggleTheme = () => {
-    const nextTheme = theme === "dark" ? "light" : "dark";
-    document.documentElement.dataset.theme = nextTheme;
-    document.documentElement.style.colorScheme = nextTheme;
-    localStorage.setItem("color-theme", nextTheme);
-    setTheme(nextTheme);
-  };
 
   return (
     <header className="site-header">
@@ -73,31 +60,16 @@ export function SiteHeader({ active }) {
             ))}
           </ul>
         </nav>
-        <div className="site-header-actions">
-          <button
-            type="button"
-            className="theme-toggle"
-            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-            aria-pressed={theme === "dark"}
-            onClick={toggleTheme}
-          >
-            <i
-              className={theme === "dark" ? "fas fa-sun" : "fas fa-moon"}
-              aria-hidden="true"
-            />
-            <span>{theme === "dark" ? "Light" : "Dark"}</span>
-          </button>
-          <button
-            type="button"
-            className="menu-toggle"
-            aria-expanded={menuOpen}
-            aria-controls="primary-navigation"
-            onClick={() => setMenuOpen((open) => !open)}
-          >
-            <span className="sr-only">Toggle navigation</span>
-            <i className="fas fa-bars" aria-hidden="true" />
-          </button>
-        </div>
+        <button
+          type="button"
+          className="menu-toggle"
+          aria-expanded={menuOpen}
+          aria-controls="primary-navigation"
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <span className="sr-only">Toggle navigation</span>
+          <i className="fas fa-bars" aria-hidden="true" />
+        </button>
       </div>
     </header>
   );

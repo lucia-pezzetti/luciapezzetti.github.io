@@ -9,14 +9,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var saved=localStorage.getItem("color-theme");var theme=saved||"light";document.documentElement.dataset.theme=theme;document.documentElement.style.colorScheme=theme;}catch(e){document.documentElement.dataset.theme="light";}})();`,
-          }}
-        />
-      </head>
+    <html lang="en">
       <body>{children}</body>
     </html>
   );
