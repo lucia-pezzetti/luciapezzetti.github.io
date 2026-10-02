@@ -12,11 +12,42 @@ export const metadata = {
   title: "Lucia Pezzetti",
   description:
     "Welcome to the personal website of Lucia Pezzetti. Explore research, publications, news, and more.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Lucia Pezzetti",
+    description:
+      "Welcome to the personal website of Lucia Pezzetti. Explore research, publications, news, and more.",
+    url: "/",
+    siteName: "Lucia Pezzetti",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary",
+    title: "Lucia Pezzetti",
+    description:
+      "Welcome to the personal website of Lucia Pezzetti. Explore research, publications, news, and more.",
+  },
+};
+
+const websiteStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Lucia Pezzetti",
+  url: "https://luciapezzetti.com/",
 };
 
 export default function HomePage() {
   return (
     <div className="page-shell home-page-shell">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteStructuredData).replace(/</g, "\\u003c"),
+        }}
+      />
       <SiteHeader active="about" />
 
       <main className="page-content">
@@ -62,9 +93,9 @@ export default function HomePage() {
             </div>
 
             {/* Name and Role */}
-            <h2 style={{ fontSize: '32px', fontWeight: 'bold', margin: '10px 0', color: 'var(--ink)'}}>
+            <h1 style={{ fontSize: '32px', fontWeight: 'bold', margin: '10px 0', color: 'var(--ink)'}}>
               Lucia Pezzetti
-            </h2>
+            </h1>
             <hr className="horizontal-line" style={{width: '30%', margin: '10px auto', height: '3px', backgroundColor: '#709f9d', display: 'block'}}/>
             <p style={{ fontSize: '18px', color: 'var(--muted)', marginBottom: '10px' }}>
               PhD Student @ ETH AI Center
@@ -153,14 +184,14 @@ export default function HomePage() {
 
 
         <section className="section-panel">
-          <SectionBanner>News</SectionBanner>
+          <SectionBanner level={2}>News</SectionBanner>
           <NewsList limit={4} />
           <ViewAllLink href="/news">See all news</ViewAllLink>
         </section>
 
         {/* Recent Publications */}
         <section className="section-panel">
-          <SectionBanner>Recent Publications</SectionBanner>
+          <SectionBanner level={2}>Recent Publications</SectionBanner>
           <PublicationsList limit={2} />
           <ViewAllLink href="/publications">See all publications</ViewAllLink>
         </section>

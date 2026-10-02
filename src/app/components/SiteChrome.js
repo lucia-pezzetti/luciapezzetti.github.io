@@ -127,10 +127,12 @@ export function Footer() {
   );
 }
 
-export function SectionBanner({ children }) {
+export function SectionBanner({ children, level = 1 }) {
+  const Heading = level === 2 ? "h2" : "h1";
+
   return (
     <div className="section-banner">
-      <h1 className="section-banner-title">{children}</h1>
+      <Heading className="section-banner-title">{children}</Heading>
     </div>
   );
 }
