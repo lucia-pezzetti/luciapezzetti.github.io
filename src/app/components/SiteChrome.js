@@ -74,9 +74,9 @@ export function SiteHeader({ active }) {
           <div
             className="time-drink"
             title={`${timeStatus.time} in Zurich · ${timeStatus.label}`}
-            aria-label={`CET time ${timeStatus.time}. ${timeStatus.label}`}
+            aria-label={`CET ${timeStatus.time}. ${timeStatus.label}`}
           >
-            <span className="time-zone">CET time {timeStatus.time}</span>
+            <span className="time-zone">CET {timeStatus.time}</span>
             <span className="time-divider" aria-hidden="true">·</span>
             <span aria-hidden="true">{timeStatus.icon}</span>
             <span>{timeStatus.label}</span>
