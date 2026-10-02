@@ -9,7 +9,7 @@ import {
 import Image from "next/image";
 
 export const metadata = {
-  title: "Lucia Pezzetti - Research & Publications",
+  title: "Lucia Pezzetti",
   description:
     "Welcome to the personal website of Lucia Pezzetti. Explore research, publications, news, and more.",
 };
