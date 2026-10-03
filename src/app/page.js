@@ -30,6 +30,16 @@ export const metadata = {
     description:
       "Welcome to the personal website of Lucia Pezzetti. Explore research, publications, news, and more.",
   },
+  robots: {
+    index: true,
+    follow: true,
+    "max-image-preview": "none",
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "none",
+    },
+  },
 };
 
 const websiteStructuredData = {

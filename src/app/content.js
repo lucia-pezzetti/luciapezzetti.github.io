@@ -149,6 +149,7 @@ export const publications = [
     ),
     venue: "Advances in Neural Information Processing Systems (NeurIPS 2026)",
     paperUrl: "",
+    pdfUrl: "/Separation_Principle_for_MARL.pdf",
     bibtexUrl: "",
   },
   {
